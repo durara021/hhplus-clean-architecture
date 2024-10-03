@@ -18,4 +18,12 @@ export class LectureService {
 
     }
 
+    async updateCurrent(domain: LectureDomain, manager?: EntityManager): Promise<number> {
+
+        const result: UpdateResult = await this.lectureRepository.updateCurrent(LectureMapper.DomainToEntity(domain), manager);
+        
+        return result.affected;
+
+    }
+
 }

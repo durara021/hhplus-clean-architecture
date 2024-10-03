@@ -49,16 +49,16 @@ describe('RegisterUseCase', () => {
     dataSource = module.get<DataSource>(DataSource);
   });
 
-  it('should fail to register if the lecture does not exist', async () => {
+  it('강의가 존재하지 않으면 등록에 실패해야 함', async () => {
     // Given: 요청 데이터가 있고, 강의가 존재하지 않음
-    const dto = new RegisterReqDto(null, null, null ,null);
+    const dto = new RegisterReqDto(1, 2, null ,null);
     (lectureService.lectures as jest.Mock).mockResolvedValue([]);
 
     // When/Then: 강의가 없으므로 null이 반환되어야 함
     await expect(registerUseCase.regist(dto)).resolves.toBeNull();
   });
 
-  it('should fail to register if the user is already registered', async () => {
+  it('유저가 이미 등록된 경우 등록에 실패해야 함', async () => {
     // Given: 요청 데이터와 이미 등록된 유저가 있음
     const dto = new RegisterReqDto(null, null, null, null);
     (lectureService.lectures as jest.Mock).mockResolvedValue([{}]); // 강의는 존재함
@@ -68,7 +68,7 @@ describe('RegisterUseCase', () => {
     await expect(registerUseCase.regist(dto)).resolves.toBeNull();
   });
 
-  it('should fail to update lecture current if transaction fails', async () => {
+  it('트랜잭션 실패 시 강의 현재 인원 업데이트에 실패해야 함', async () => {
     // Given: 강의가 존재하고, 유저는 등록되지 않았음
     const dto = new RegisterReqDto(null, null, null, null);
     (lectureService.lectures as jest.Mock).mockResolvedValue([{}]); // 강의는 존재함
@@ -80,7 +80,7 @@ describe('RegisterUseCase', () => {
     await expect(registerUseCase.regist(dto)).rejects.toThrow('Transaction failed');
   });
 
-  it('should fail to fetch my lectures if database error occurs', async () => {
+  it('내 강의 조회 중 데이터베이스 오류가 발생하면 실패해야 함', async () => {
     // Given: 내 강의 조회 중 데이터베이스 오류 발생
     const dto = new RegisterReqDto(null, null, null, null);
     (registerService.myLectures as jest.Mock).mockRejectedValue(new Error('Database error'));
@@ -90,7 +90,7 @@ describe('RegisterUseCase', () => {
   });
 
 
-  it('should fetch users successfully', async () => {
+  it('유저를 성공적으로 조회해야 함', async () => {
     // Given: 요청 데이터 생성
     const dto: UserReqDto = { id: 1 };
     const userEntity: UserEntity = { id: 1, ids: null, name: 'John Doe', isInstructor: 0, updateMillis: Date.now() };
@@ -105,7 +105,7 @@ describe('RegisterUseCase', () => {
     expect(result).toEqual([userEntity]);
   });
 
-  it('should return empty array if no users found', async () => {
+  it('유저가 없으면 빈 배열을 반환해야 함', async () => {
     // Given: 요청 데이터 생성
     const dto: UserReqDto = { id: 1 };
 
@@ -119,7 +119,7 @@ describe('RegisterUseCase', () => {
     expect(result).toEqual([]);
   });
 
-  it('should fail if user service throws an error', async () => {
+  it('유저 서비스에서 오류가 발생하면 실패해야 함', async () => {
     // Given: 요청 데이터 생성
     const dto: UserReqDto = { id: 1 };
 

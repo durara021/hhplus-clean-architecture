@@ -47,4 +47,13 @@ export class LectureUseCase {
             return Mapper.DomainArrayToResDtoArray(resDomains);
         });
     }
+
+    // 강의 현원 추가
+    async updateCurrent(dto: LectureReqDto): Promise<number | null> {
+        return await this.dataSource.transaction(async () => {
+            const model: LectureDomain = Mapper.DtoToDomain(dto);
+            const result = await this.lectureService.updateCurrent(model);
+            return result;
+        });
+    }
 }

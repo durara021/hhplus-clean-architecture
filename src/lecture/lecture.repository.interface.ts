@@ -5,5 +5,6 @@ import { EntityManager, UpdateResult } from "typeorm";
 export abstract class  LectureRepositoryInterface {
 
     abstract lectures(entity: LectureEntity, manager?: EntityManager): Promise<LectureEntity[]>
+    abstract updateCurrent(entity: LectureEntity, manager?: EntityManager): Promise<UpdateResult>;
     
 }

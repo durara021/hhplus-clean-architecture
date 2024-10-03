@@ -29,4 +29,19 @@ export class LectureRepository implements LectureRepositoryInterface {
 
     }
 
+    //강의 현원 업데이트 기능
+    async updateCurrent(entity: LectureEntity, manager: EntityManager): Promise<UpdateResult> {
+
+        let queryBuilder = this.repository.createQueryBuilder('lecture');
+        if(manager) queryBuilder = manager.createQueryBuilder(LectureEntity, 'lecture');
+
+        return await queryBuilder
+            .update(LectureEntity)
+            .set({ current: () => "current + 1" }) // current 값에 increment를 더함
+            .where("id = :id", { id: entity.id })
+            .andWhere("current < capacity")
+            .execute();
+
+    }
+
 }
