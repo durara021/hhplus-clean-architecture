@@ -1,14 +1,15 @@
 export class RegisterDomain {
-    id: number;
-    lecture: number;
-    user: number;
-    regDate: number;
+    
+    id: number | null;
+    lecture: number | null;
+    user: number | null;
+    regDate: Date | null;
 
     constructor(
-        id: number,
-        lecture: number,
-        user: number,
-        regDate: number,
+        id: number | null,
+        lecture: number | null,
+        user: number | null,
+        regDate: Date | null,
     ) {
         // 필드 초기화
         this.id = id;
@@ -16,6 +17,4 @@ export class RegisterDomain {
         this.user = user;
         this.regDate = regDate;
     }
-
-    
 }

@@ -36,9 +36,9 @@ export class RegisterRepository implements RegisterRepositoryInterface {
     //내 강의 조회
     async myLectures(entity: RegisterEntity, manager?: EntityManager): Promise<RegisterEntity[] | null> {
 
-        if(manager) return await manager.find(RegisterEntity, { where: { id: entity.id } });
+        if(manager) return await manager.find(RegisterEntity, { where: { user: entity.user } });
         
-        return await this.repository.find({ where: { id: entity.id } });
+        return await this.repository.find({ where: { user: entity.user } });
         
     };
 

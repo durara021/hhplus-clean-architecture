@@ -11,9 +11,16 @@ export class LectureController {
 
     // 강의 조회
     @Get('lectures')
-    async lectures(@Query('id') id: string, @Query('instructor') instructor: string): Promise<LectureResDto[]> {
+    async lectures(@Query()query: LectureReqDto): Promise<Map<string, LectureResDto[]>> {
 
-        return this.lectureCase.lectures(new LectureReqDto(parseInt(id), null, null, parseInt(instructor), null, null, null, null));
+        return this.lectureCase.lectures(query);
+
+    }
+
+    @Get('lecturesByDay')
+    async lecturesByDay(@Query()query: LectureReqDto): Promise<LectureResDto[]> {
+
+        return this.lectureCase.lecturesByDay(query);
 
     }
 

@@ -13,11 +13,10 @@ export class LectureEntity {
     @Column({ type: 'varchar', length: 255 })
     title: string;
 
-    // 강사와의 관계 설정
     @Column({ type: 'int' })
     instructor: number;
 
-    @Column({ type: 'datetime' })
+    @Column({ type: 'timestamp' })
     date: Date;
 
     @Column({ type: 'int' })

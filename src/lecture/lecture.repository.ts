@@ -14,17 +14,20 @@ export class LectureRepository implements LectureRepositoryInterface {
     //특정강의 조회 기능
     async lectures(entity: LectureEntity, manager: EntityManager): Promise<LectureEntity[]> {
 
-         // QueryBuilder를 사용하여 동적으로 AND 조건 적용
+        // QueryBuilder를 사용하여 동적으로 AND 조건 적용
         let queryBuilder = this.repository.createQueryBuilder('lecture');
-        if(manager) queryBuilder = manager.createQueryBuilder(LectureEntity, 'lecture');
-            queryBuilder
+        if(manager) {
+            queryBuilder = manager.createQueryBuilder(LectureEntity, 'lecture')
             .andWhere('capacity > current')
             .setLock('pessimistic_write');
-        
+        }
         if (entity.id) queryBuilder.andWhere('id = :id', { id: entity.id });
         if (entity.ids) queryBuilder.andWhere('id in (:...id)', { id: entity.ids});
+        if (entity.lectureId) queryBuilder.andWhere('lectrueId = :lectureId', { lectrueId: entity.lectureId});
         if (entity.instructor) queryBuilder.andWhere('lecture.instructor = :instructor', { instructor: entity.instructor });
- 
+        if (entity.date) {
+            queryBuilder.andWhere('date = :date', {date: entity.date});
+        }
         return await queryBuilder.getMany();;
 
     }

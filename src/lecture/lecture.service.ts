@@ -12,12 +12,14 @@ export class LectureService {
         private readonly lectureRepository: LectureRepositoryInterface,
     ) {}
 
+    //강의 조회
     async lectures(reqDomain: LectureDomain, manager?: EntityManager): Promise<LectureEntity[]> {
 
         return this.lectureRepository.lectures(LectureMapper.DomainToEntity(reqDomain,), manager);
 
     }
 
+    //강의 현원 추가
     async updateCurrent(domain: LectureDomain, manager?: EntityManager): Promise<number> {
 
         const result: UpdateResult = await this.lectureRepository.updateCurrent(LectureMapper.DomainToEntity(domain), manager);

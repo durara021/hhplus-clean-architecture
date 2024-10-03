@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { UserUseCase } from './user.useCase';
 import { UserReqDto, UserResDto } from './dto';
 
@@ -10,9 +10,9 @@ export class UserController {
 
     // 유저 조회
     @Get(':id')
-    async user(@Param('id') id: string): Promise<UserResDto[]> {
+    async user(@Query()query: UserReqDto): Promise<UserResDto[]> {
 
-        return this.userUseCase.user(new UserReqDto(parseInt(id)));
+        return this.userUseCase.user(query);
        
     }
 

@@ -1,3 +1,5 @@
+import { IsInt, IsString, IsArray, ArrayNotEmpty, IsOptional } from 'class-validator';
+
 export class UserDomain {
     // 클래스 필드 선언
     id: number | null;
@@ -19,7 +21,5 @@ export class UserDomain {
         this.name = name;
         this.isInstructor = isInstructor;
         this.updateMillis = updateMillis;
-
     }
-
 }

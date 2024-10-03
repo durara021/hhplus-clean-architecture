@@ -1,3 +1,5 @@
+import { IsInt, IsString, IsDate, IsOptional, IsArray } from 'class-validator';
+
 export class LectureDomain {
     static readonly MAX = 30;
 
@@ -9,8 +11,8 @@ export class LectureDomain {
     instructor: number | null;
     instructorName: string | null;
     date: Date | null;
-    capacity : number | null;
-    current: number| null;
+    capacity: number | null;
+    current: number | null;
     isSpecial: number | null;
     updateMillis: number | null;
 
@@ -22,12 +24,12 @@ export class LectureDomain {
         instructor: number | null,
         instructorName: string | null,
         date: Date | null,
-        capacity : number | null,
+        capacity: number | null,
         current: number | null,
         isSpecial: number | null,
         updateMillis: number | null,
     ) {
-        // 필드를 초기화
+        // 필드 초기화
         this.id = id;
         this.ids = ids;
         this.title = title;
@@ -35,10 +37,9 @@ export class LectureDomain {
         this.instructor = instructor;
         this.instructorName = instructorName;
         this.date = date;
-        this.capacity  = capacity ;
+        this.capacity = capacity;
         this.current = current;
         this.isSpecial = isSpecial;
         this.updateMillis = updateMillis;
     }
-
 }

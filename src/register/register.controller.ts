@@ -10,22 +10,17 @@ export class RegisterController {
 
     // 강의 신청 기능
     @Get('regist')
-    async regist(
-        @Query('lecture') lecture: string,
-        @Query('user') user: string
-    ): Promise<RegisterResDto> {
+    async regist(@Query()query: RegisterReqDto): Promise<RegisterResDto> {
 
-        return this.registerUseCase.regist(new RegisterReqDto(null, parseInt(lecture), parseInt(user), Date.now()));
+        return this.registerUseCase.regist(query);
 
     }
 
     // 내 강의 조회
     @Get('myLectures')
-    async myLectures(
-        @Query('user') user: string
-    ): Promise<LectureResDto[]> {
+    async myLectures(@Query()query: RegisterReqDto): Promise<LectureResDto[]> {
 
-        return this.registerUseCase.myLectures(new RegisterReqDto(null, null, parseInt(user), null));
+        return this.registerUseCase.myLectures(query);
 
     }
 
