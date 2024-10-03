@@ -12,7 +12,7 @@ export class RegisterEntity {
     @Column({ type: 'int' })
     user: number;
 
-    @Column({ type: 'bigint' })
-    regDate: number;
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    regDate: Date;
 
 }

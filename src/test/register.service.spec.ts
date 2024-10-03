@@ -29,7 +29,7 @@ describe('RegisterService', () => {
     
   });
 
-  it('should fail to register a lecture due to a transaction error', async () => {
+  it('트랜잭션 오류로 인해 강의 등록에 실패해야 함', async () => {
     // Given: 신청할 강의 정보
     const domain = new RegisterDomain(1, 2, null, null); // userId: 1, lectureId: 2
 
@@ -43,7 +43,7 @@ describe('RegisterService', () => {
     await expect(registerService.regist(domain, manager)).rejects.toThrow('Transaction failed');
   });
 
-  it('should fail to retrieve lectures if no lectures found', async () => {
+  it('조회된 강의가 없을 때 강의 조회에 실패해야 함', async () => {
     // Given: 신청한 강의가 없을 때
     const domain = new RegisterDomain(1, null, null, null); // userId: 1
     (registerRepository.myLectures as jest.Mock).mockResolvedValue([]);

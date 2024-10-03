@@ -27,7 +27,7 @@ describe('UserService', () => {
 
   });
 
-  it('should fetch users successfully', async () => {
+  it('유저를 성공적으로 조회해야 함', async () => {
     // Given: 사용자 도메인 생성
     const domain = new UserDomain(1, null, 'John Doe', 1, Date.now()); // 예시 UserDomain 생성
     const userEntity = new UserEntity(); // 반환될 UserEntity
@@ -45,7 +45,7 @@ describe('UserService', () => {
     expect(result).toEqual([userEntity]);
   });
 
-  it('should fail to fetch users if repository throws an error', async () => {
+  it('레포지토리에서 오류가 발생하면 유저 조회에 실패해야 함', async () => {
     // Given: 사용자 도메인 생성
     const domain = new UserDomain(1, null, 'John Doe', 1, Date.now());
 
@@ -56,7 +56,7 @@ describe('UserService', () => {
     await expect(userService.user(domain)).rejects.toThrow('Database error');
   });
 
-  it('should return an empty array if no users are found', async () => {
+  it('유저가 없으면 빈 배열을 반환해야 함', async () => {
     // Given: 사용자 도메인 생성
     const domain = new UserDomain(1, null, 'John Doe', 1, Date.now());
 

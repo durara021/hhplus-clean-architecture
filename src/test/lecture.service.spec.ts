@@ -28,7 +28,7 @@ describe('LectureService', () => {
 
   });
 
-  it('should fail to fetch lectures if repository throws an error', async () => {
+  it('레포지토리에서 오류가 발생하면 강의 조회에 실패해야 함', async () => {
     // Given: 요청을 처리하는 도중 repository에서 오류 발생
     const domain = new LectureDomain(1, null, null, null, null, null, null, null, null, null, null);
 
@@ -39,7 +39,7 @@ describe('LectureService', () => {
     await expect(lectureService.lectures(domain)).rejects.toThrow('Database error');
   });
 
-  it('should fail to update lecture current students if update does not affect any rows', async () => {
+  it('업데이트된 행이 없으면 강의 현재 인원 업데이트에 실패해야 함', async () => {
     // Given: 강의 인원을 업데이트하려고 할 때
     const domain = new LectureDomain(1, null, null, null, null, null, null, null, null, null, null);
     
@@ -54,7 +54,7 @@ describe('LectureService', () => {
     expect(result).toBe(0); // 0이 반환되면 업데이트가 실패했음을 의미
   });
 
-  it('should throw an error if updateCurrent fails in the repository', async () => {
+  it('레포지토리에서 updateCurrent가 실패하면 오류를 던져야 함', async () => {
     // Given: 강의 인원 업데이트 중 repository에서 오류가 발생
     const domain = new LectureDomain(1, null, null, null, null, null, null, null, null, null, null);
 

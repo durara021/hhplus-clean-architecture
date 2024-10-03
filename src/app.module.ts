@@ -20,6 +20,7 @@ import { RegisterEntity } from './register/entity/register.entity';
       password: 'qwe124!@$', // 데이터베이스 비밀번호
       database: 'hhpluscleanarchitecture',  // 사용할 데이터베이스 이름
       entities: [ LectureEntity, UserEntity, RegisterEntity ],  // 엔티티 배열
+      //entities: [ __dirname + '/entitiy/*.entity{.ts,.js}' ],  // 엔티티 배열
       synchronize: true, // 개발 시 자동으로 스키마를 동기화 (생산 환경에서는 false로 설정 권장)
       extra: {
         connectionLimit: 100,
