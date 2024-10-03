@@ -47,13 +47,30 @@ describe('통합테스트', () => {
     // QueryRunner 생성
     queryRunner = dataSource.createQueryRunner();
     await queryRunner.connect();
-    
+
+    await queryRunner.query('insert into lecture values (6, 1, "Introduction to TypeScript", 4, "2024-10-09", 30, 0, 0,1696220400000);');
+    await queryRunner.query('insert into lecture values (7, 2, "Advanced Node.js Techniques", 5, "2024-10-09", 30, 0, 0, 1696224000000);');
+    await queryRunner.query('insert into lecture values (8, 1, "Introduction to TypeScript", 4, "2024-10-11", 30, 0, 0,1696227600000);');
+    await queryRunner.query('insert into lecture values (9, 4, "Database Design Principles", 3, "2024-10-12", 30, 0, 0, 1696231200000);');
+    await queryRunner.query('insert into lecture values (10, 5, "Clean Architecture with TypeScript", 2, "2024-10-13", 30, 0, 0, 1696234800000);');
+
+    await queryRunner.query('insert into user values(1,"roy",0,1696220400000);');
+    await queryRunner.query('insert into user values(2,"len",0,1696220400000);');
+    await queryRunner.query('insert into user values(3,"tyler",0,1696220400000);');
+    await queryRunner.query('insert into user values(4,"totuu",0,1696220400000);');
+    await queryRunner.query('insert into user values(5,"jonghyep",0,1696220400000);');
+    await queryRunner.query('insert into user values(6,"haujea",0,1696220400000);');
+    await queryRunner.query('insert into user values(7,"hunwoo",0,1696220400000);');
+    await queryRunner.query('insert into user values(8,"sunkbom",0,1696220400000);');
+
   });
 
   afterAll(async () => {
     // QueryRunner 해제 및 애플리케이션 종료
     await queryRunner.query('update lecture set current = 0;');
     await queryRunner.query('DELETE FROM register;');
+    await queryRunner.query('DELETE FROM lecture;');
+    await queryRunner.query('DELETE FROM user;');
     await queryRunner.release();
     await app.close();
   });
